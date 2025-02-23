@@ -1,5 +1,6 @@
 import React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import  PoultryIllustration  from "../assets/poultry-illustration.svg";
 
 const Dashboard = () => {
   const navigate = useNavigate(); // Hook for programmatic navigation
@@ -25,6 +26,7 @@ const Dashboard = () => {
       {/* Main Content */}
       <main className="flex-1 p-6">
         <h1 className="text-3xl font-bold mb-6">Welcome to Your Dashboard</h1>
+        <img src={PoultryIllustration} alt="Poultry Illustration" className="w-165 h-64 mb-6" />
         <Outlet /> {/* Child routes render here */}
       </main>
     </div>

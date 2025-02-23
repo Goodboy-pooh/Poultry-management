@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import  InventoryIcon  from "../assets/inventory-icon.svg?react";
+import  ProductionIcon  from "../assets/production-icon.svg?react";
+import  ReportsIcon  from "../assets/reports-icon.svg?react";
+
 
 const LandingPage = ({ onLogin }) => {
   return (
@@ -33,14 +37,17 @@ const LandingPage = ({ onLogin }) => {
         <h3 className="text-3xl font-bold text-center mb-6">Key Features</h3>
         <div className="grid grid-cols-3 gap-6">
           <div className="p-5 bg-gray-100 rounded-xl shadow-lg text-center">
+            <InventoryIcon className="w-24 h-24 mx-auto mb-3" />
             <h4 className="text-lg font-semibold">Inventory Management</h4>
             <p className="text-gray-500">Keep track of your poultry stock with ease.</p>
           </div>
           <div className="p-5 bg-gray-100 rounded-xl shadow-lg text-center">
+            <ProductionIcon className="w-24 h-24 mx-auto mb-3" />
             <h4 className="text-lg font-semibold">Production Tracking</h4>
             <p className="text-gray-500">Monitor egg production and optimize output.</p>
           </div>
           <div className="p-5 bg-gray-100 rounded-xl shadow-lg text-center">
+            <ReportsIcon className="w-24 h-24 mx-auto mb-3" />
             <h4 className="text-lg font-semibold">Automated Reports</h4>
             <p className="text-gray-500">Generate insightful reports for better decision-making.</p>
           </div>
