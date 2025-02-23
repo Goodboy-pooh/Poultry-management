@@ -7,7 +7,7 @@ const PoultryManagement = () => {
     weight: "",
     healthStatus: "",
     vaccination: "",
-    feedConsumption: "",
+    feedConsumption: ""
     eggProduction: "",
     mortality: "",
     date: ""
