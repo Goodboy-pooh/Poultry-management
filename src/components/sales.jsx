@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { addDoc, collection } from "firebase/firestore";
+import  db  from "../firebase"; // Ensure db is exported from firebase.js
 
 const SalesExpenses = () => {
   const [formData, setFormData] = useState({
@@ -10,14 +12,41 @@ const SalesExpenses = () => {
     operationalExpenses: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Sales & Expenses Data Submitted:", formData);
-    // You can add API calls or data processing here
+    setLoading(true);
+
+    try {
+      await addDoc(collection(db, "sales"), {
+        saleDate: formData.saleDate,
+        quantitySold: parseInt(formData.quantitySold),
+        revenue: parseFloat(formData.revenue),
+        feedCost: parseFloat(formData.feedCost),
+        medicineCost: parseFloat(formData.medicineCost),
+        operationalExpenses: parseFloat(formData.operationalExpenses),
+      });
+
+      alert("Sales & Expenses data submitted successfully!");
+      setFormData({
+        saleDate: "",
+        quantitySold: "",
+        revenue: "",
+        feedCost: "",
+        medicineCost: "",
+        operationalExpenses: "",
+      });
+    } catch (error) {
+      console.error("Error submitting data:", error);
+      alert("Failed to submit data. Try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -90,7 +119,9 @@ const SalesExpenses = () => {
             required
           />
         </div>
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded">Submit</button>
+        <button type="submit" className="bg-blue-500 text-white p-2 rounded" disabled={loading}>
+          {loading ? "Submitting..." : "Submit"}
+        </button>
       </form>
     </div>
   );

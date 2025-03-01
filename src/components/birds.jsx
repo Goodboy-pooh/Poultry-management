@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { addDoc, collection } from "firebase/firestore";
+import  db  from "../firebase"; // Ensure db is exported from firebase.js
+
 
 const PoultryManagement = () => {
   const [formData, setFormData] = useState({
@@ -13,13 +16,44 @@ const PoultryManagement = () => {
     date: ""
   });
 
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Poultry Data Submitted:", formData);
+    setLoading(true);
+
+    try {
+      await addDoc(collection(db, "poultry"), {
+        ...formData,
+        age: parseInt(formData.age),
+        weight: parseFloat(formData.weight),
+        feedConsumption: parseFloat(formData.feedConsumption),
+        eggProduction: formData.category === "Layers" ? parseInt(formData.eggProduction) : 0,
+        mortality: parseInt(formData.mortality),
+        date: formData.date
+      });
+      alert("Poultry data submitted successfully!");
+      setFormData({
+        category: "",
+        age: "",
+        weight: "",
+        healthStatus: "",
+        vaccination: "",
+        feedConsumption: "",
+        eggProduction: "",
+        mortality: "",
+        date: ""
+      });
+    } catch (error) {
+      console.error("Error submitting data:", error);
+      alert("Failed to submit data. Try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -69,10 +103,13 @@ const PoultryManagement = () => {
           <label className="block text-gray-700">Date:</label>
           <input type="date" name="date" value={formData.date} onChange={handleChange} className="w-full p-2 border rounded" required />
         </div>
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded">Submit</button>
+        <button type="submit" className="bg-blue-500 text-white p-2 rounded" disabled={loading}>
+          {loading ? "Submitting..." : "Submit"}
+        </button>
       </form>
     </div>
   );
 };
 
 export default PoultryManagement;
+
