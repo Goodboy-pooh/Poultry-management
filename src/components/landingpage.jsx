@@ -27,9 +27,11 @@ const LandingPage = ({ onLogin }) => {
         <p className="text-lg text-gray-600 max-w-2xl mb-6">
           Streamline your poultry farm operations with our advanced management system. Track inventory, monitor production, and optimize your processes effortlessly.
         </p>
-        <button onClick={onLogin} className="px-6 py-3 bg-blue-600 text-white rounded-xl shadow-lg hover:bg-blue-700 transition">
+        <Link to ="/dashboard">
+     <button onClick={onLogin} className="px-6 py-3 bg-blue-600 text-white rounded-xl shadow-lg hover:bg-blue-700 transition">
           Get Started
         </button>
+        </Link>
       </section>
 
       {/* Features Section */}
