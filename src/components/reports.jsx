@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getDocs, collection } from "firebase/firestore";
-import  db  from "../firebase"; // Ensure db is exported from firebase.js
+import  {db}  from "../firebase"; // Ensure db is exported from firebase.js
 
 const Reports = () => {
   const [poultryStock, setPoultryStock] = useState(0);

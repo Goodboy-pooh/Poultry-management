@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
-import  db  from "../firebase"; // Ensure db is exported from firebase.js
+import {db} from "../firebase"; // Ensure db is exported from firebase.js
 
 const SalesExpenses = () => {
   const [formData, setFormData] = useState({
